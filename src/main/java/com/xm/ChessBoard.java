@@ -21,7 +21,7 @@ public class ChessBoard {
 
         squares = new Square[width][height];
         for (int i = 0; i < width; i++) {
-            Arrays.fill(squares[i], Square.getDefaultSquare());
+            Arrays.fill(squares[i], Square.createDefaultSquare());
         }
     }
 

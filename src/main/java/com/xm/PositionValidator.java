@@ -18,6 +18,7 @@ public class PositionValidator {
                 .filter(this::isValid)
                 .collect(toUnmodifiableSet());
     }
+
     private boolean isValid(CoordinatesPair position) {
         return position.x > 0
                 && position.x < chessBoard.getWidth()
