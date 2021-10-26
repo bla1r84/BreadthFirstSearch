@@ -1,13 +1,16 @@
 package com.xm.utils;
 
+import com.xm.model.Node;
 import com.xm.model.data.Piece;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Utility class to output the path from start to target
@@ -16,17 +19,19 @@ import java.util.Map;
 @Slf4j
 public class CoordinatesPathLogger {
 
-    public static <T extends Piece> void logPath(Deque<T> path) {
+    public static <T extends Piece> void logPath(Deque<Node<T>> path) {
         log.info("Minimum jumps required: {}", path.size() - 1);
         log.info("Shortest path: {}", generatePathString(path));
     }
 
-    private static <T extends Piece> String generatePathString(Deque<T> path) {
+    private static <T extends Piece> String generatePathString(Deque<Node<T>> path) {
         Map<Integer, String> numberToLetterMap = NumberToLetterMapper.numberToLetterMap;
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        Iterator<T> iterator = path.iterator();
+        Deque<T> dataPath = getDataPathFromNodePath(path);
+
+        Iterator<T> iterator = dataPath.iterator();
 
         while (iterator.hasNext()) {
             T piece = iterator.next();
@@ -45,6 +50,12 @@ public class CoordinatesPathLogger {
         }
 
         return stringBuilder.toString();
+    }
+
+    private static <T extends Piece> Deque<T> getDataPathFromNodePath(Deque<Node<T>> path) {
+        return path.stream()
+                .map(Node::getData)
+                .collect(Collectors.toCollection(ArrayDeque::new));
     }
 
 }

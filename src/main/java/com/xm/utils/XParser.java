@@ -20,7 +20,8 @@ public class XParser {
         if (!LetterToNumberMapper.letterToNumberMap.containsKey(xFromProperties)) {
             int x = toInt(xFromProperties);
             if (x <=0 || x > ChessBoardDimensions.X) {
-                throw new IllegalArgumentException("Invalid " + xProperty + " given (" + x + ")");
+                throw new IllegalArgumentException("Invalid " + xProperty + " given (" + x + "). Must be between 0" +
+                        " and " + ChessBoardDimensions.X);
             }
         }
 

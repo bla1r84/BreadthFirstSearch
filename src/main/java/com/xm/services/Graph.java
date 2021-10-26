@@ -34,7 +34,7 @@ public class Graph<T extends Data> {
 
     private final AdjacentNodesFinder<T> adjacentNodesFinder;
 
-    public Deque<T> breadthFirstSearch(Node<T> start, Node<T> target) {
+    public Deque<Node<T>> breadthFirstSearch(Node<T> start, Node<T> target) {
         Deque<Node<T>> deque = new ArrayDeque<>();
         Map<Node<T>, Node<T>> visited = new HashMap<>();
 
@@ -56,12 +56,11 @@ public class Graph<T extends Data> {
             }
 
             for (Node<T> n : adjacentNodesFinder.getAdjacent(current)) {
-                visited.computeIfAbsent(n, node -> {
-                    node.setPrevious(current);
-                    node.setDepth(current.getDepth() + 1);
-                    deque.add(node);
-                    return node;
-                });
+                deque.add(visited.computeIfAbsent(n, node -> Node.<T>builder()
+                        .data(node.getData())
+                        .previous(current)
+                        .depth(current.getDepth() + 1)
+                        .build()));
             }
         }
 

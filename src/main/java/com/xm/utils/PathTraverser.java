@@ -24,16 +24,16 @@ public class PathTraverser {
      * @param <T> the type of Data the Nodes contain
      * @return the path from start to finish as a Deque
      */
-    public static <T extends Data> Deque<T> traversePath(Node<T> start, Node<T> target, Map<Node<T>, Node<T>> visited) {
-        Deque<T> path = new ArrayDeque<>();
+    public static <T extends Data> Deque<Node<T>> traversePath(Node<T> start, Node<T> target, Map<Node<T>, Node<T>> visited) {
+        Deque<Node<T>> path = new ArrayDeque<>();
         Node<T> current = visited.get(target);
 
         while (!current.equals(start)) {
-            path.push(current.getData());
+            path.push(current);
             current = current.getPrevious();
         }
 
-        path.push(start.getData());
+        path.push(start);
 
         return path;
     }

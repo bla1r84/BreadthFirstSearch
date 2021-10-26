@@ -15,16 +15,20 @@ import lombok.*;
  * @param <T> the type of Data the Nodes of the Graph contain
  */
 @RequiredArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
+@Builder
 public class Node<T extends Data> {
 
     @EqualsAndHashCode.Include
     private final T data;
 
+    @ToString.Exclude
     private Node<T> previous;
+
     private int depth;
 
 }

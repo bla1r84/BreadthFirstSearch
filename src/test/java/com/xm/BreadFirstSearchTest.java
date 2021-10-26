@@ -27,7 +27,7 @@ class BreadFirstSearchTest {
         Node<MyInteger> myIntegerTarget = new Node<>(new MyInteger(1));
         AdjacentNodesFinder<MyInteger> myIntegerAdjacentNodesFinder = new MyIntegerAdjacentNodesFinder();
         Graph<MyInteger> integerGraph = new Graph<>(myIntegerAdjacentNodesFinder);
-        Deque<MyInteger> deque = integerGraph.breadthFirstSearch(myIntegerStart, myIntegerTarget);
+        Deque<Node<MyInteger>> deque = integerGraph.breadthFirstSearch(myIntegerStart, myIntegerTarget);
         log.info("{}", deque);
         assertThat(deque.size()).isEqualTo(3);
     }
@@ -45,9 +45,15 @@ class BreadFirstSearchTest {
         AdjacentNodesFinder<Piece> knightAdjacentNodesFinder = new KnightAdjacentNodesFinder();
         Graph<Piece> knightGraph = new Graph<>(knightAdjacentNodesFinder);
 
-        Deque<Piece> finalPath = knightGraph.breadthFirstSearch(knightStart, knightTarget);
+        Deque<Node<Piece>> finalPath = knightGraph.breadthFirstSearch(knightStart, knightTarget);
         log.info("{}", finalPath.peekLast());
         CoordinatesPathLogger.logPath(finalPath);
+
+        Node<Piece> last = finalPath.peekLast();
+
+        if (!finalPath.isEmpty()) {
+            assertThat(last.getDepth()).isEqualTo(finalPath.size() - 1);
+        }
     }
 
 }

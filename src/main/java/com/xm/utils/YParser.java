@@ -16,7 +16,8 @@ public class YParser {
         int y = Integer.parseInt(properties.getProperty(yProperty));
 
         if (y <= 0 || y > ChessBoardDimensions.Y) {
-            throw new IllegalArgumentException("Invalid " + yProperty + " given (" + y + ")");
+            throw new IllegalArgumentException("Invalid " + yProperty + " given (" + y + "). Must be between 0" +
+                    " and " + ChessBoardDimensions.Y);
         }
 
         return y - 1;

@@ -20,6 +20,14 @@ public class ChessBoardDimensions {
 
         X = NumberUtils.toInt(properties.getProperty(CHESSBOARD_DIMENSIONS_X));
         Y = NumberUtils.toInt(properties.getProperty(CHESSBOARD_DIMENSIONS_Y));
+
+        if (X <= 0) {
+            throw new IllegalArgumentException("Invalid value for X (must be positive)");
+        }
+
+        if (Y <= 0) {
+            throw new IllegalArgumentException("Invalid value for Y (must be positive)");
+        }
     }
 
 }
