@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Set;
 
+import static com.xm.model.data.Piece.createPieceFromCoordinates;
 import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
@@ -60,7 +61,7 @@ public class KnightAdjacentNodesFinder implements AdjacentNodesFinder<Piece> {
     }
 
     private Piece createKnightWithCoordinates(Coordinates coordinates) {
-        return new Piece(coordinates);
+        return createPieceFromCoordinates(coordinates);
     }
 
     private boolean isValid(Node<Piece> knightNode) {

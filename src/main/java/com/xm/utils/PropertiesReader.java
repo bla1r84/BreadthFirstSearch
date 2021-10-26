@@ -13,15 +13,19 @@ public class PropertiesReader {
 
     private static final String PROPERTIES_FILENAME = "application.properties";
 
+    private static Properties applicationProperties;
+
     public static Properties getApplicationProperties() {
-        InputStream in = ChessBoardDimensions.class.getClassLoader().getResourceAsStream(PROPERTIES_FILENAME);
-        Properties properties = new Properties();
-        try {
-            properties.load(in);
-        } catch (IOException e) {
-            throw new IORuntimeException(e);
+        if (applicationProperties == null) {
+            InputStream in = ChessBoardDimensions.class.getClassLoader().getResourceAsStream(PROPERTIES_FILENAME);
+            applicationProperties = new Properties();
+            try {
+                applicationProperties.load(in);
+            } catch (IOException e) {
+                throw new IORuntimeException(e);
+            }
         }
-        return properties;
+        return applicationProperties;
     }
 
 }

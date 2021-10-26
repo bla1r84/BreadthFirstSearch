@@ -8,7 +8,7 @@ import java.util.Map;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LetterToNumberMapper {
 
-    private static final Map<String, Integer> letterToNumberMap = Map.of(
+    public static final Map<String, Integer> letterToNumberMap = Map.of(
             "A", 0,
             "B", 1,
             "C", 2,
@@ -18,9 +18,5 @@ public class LetterToNumberMapper {
             "G", 6,
             "H", 7
     );
-
-    public static Map<String, Integer> getMap() {
-        return letterToNumberMap;
-    }
 
 }

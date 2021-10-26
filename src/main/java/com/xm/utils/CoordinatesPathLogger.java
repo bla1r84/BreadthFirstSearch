@@ -22,7 +22,7 @@ public class CoordinatesPathLogger {
     }
 
     private static <T extends Piece> String generatePathString(Deque<T> path) {
-        Map<Integer, String> numberToLetterMap = NumberToLetterMapper.getMap();
+        Map<Integer, String> numberToLetterMap = NumberToLetterMapper.numberToLetterMap;
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -34,7 +34,7 @@ public class CoordinatesPathLogger {
 
             stringBuilder.append(numberToLetterMap.getOrDefault(
                     piece.getCoordinates().x,
-                    String.valueOf(piece.getCoordinates().x)));
+                    String.valueOf(piece.getCoordinates().x + 1)));
 
             stringBuilder.append(" ");
             stringBuilder.append(piece.getCoordinates().y + 1);

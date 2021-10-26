@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Deque;
 
+import static com.xm.model.data.Piece.createPieceFromCoordinates;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -33,18 +34,20 @@ class BreadFirstSearchTest {
 
     @Test
     void testBFSForKnight() {
-        Node<Piece> knightStart = new Node<>(new Piece(Coordinates.valueOf(
-                Settings.START.getLeft(),
-                Settings.START.getRight())));
+        Node<Piece> knightStart = new Node<>(createPieceFromCoordinates(Coordinates.valueOf(
+                Settings.START.x,
+                Settings.START.y)));
 
-        Node<Piece> knightTarget = new Node<>(new Piece(Coordinates.valueOf(
-                Settings.TARGET.getLeft(),
-                Settings.TARGET.getRight())));
+        Node<Piece> knightTarget = new Node<>(createPieceFromCoordinates(Coordinates.valueOf(
+                Settings.TARGET.x,
+                Settings.TARGET.y)));
 
         AdjacentNodesFinder<Piece> knightAdjacentNodesFinder = new KnightAdjacentNodesFinder();
         Graph<Piece> knightGraph = new Graph<>(knightAdjacentNodesFinder);
 
-        CoordinatesPathLogger.logPath(knightGraph.breadthFirstSearch(knightStart, knightTarget));
+        Deque<Piece> finalPath = knightGraph.breadthFirstSearch(knightStart, knightTarget);
+        log.info("{}", finalPath.peekLast());
+        CoordinatesPathLogger.logPath(finalPath);
     }
 
 }

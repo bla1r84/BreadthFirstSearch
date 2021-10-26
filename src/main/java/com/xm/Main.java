@@ -10,19 +10,21 @@ import com.xm.utils.CoordinatesPathLogger;
 import com.xm.utils.Settings;
 import lombok.extern.slf4j.Slf4j;
 
+import static com.xm.model.data.Piece.createPieceFromCoordinates;
+
 @Slf4j
 public class Main {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
 
-        Node<Piece> knightStart = new Node<>(new Piece(Coordinates.valueOf(
-                Settings.START.getLeft(),
-                Settings.START.getRight())));
+        Node<Piece> knightStart = new Node<>(createPieceFromCoordinates(Coordinates.valueOf(
+                Settings.START.x,
+                Settings.START.y)));
 
-        Node<Piece> knightTarget = new Node<>(new Piece(Coordinates.valueOf(
-                Settings.TARGET.getLeft(),
-                Settings.TARGET.getRight())));
+        Node<Piece> knightTarget = new Node<>(createPieceFromCoordinates(Coordinates.valueOf(
+                Settings.TARGET.x,
+                Settings.TARGET.y)));
 
         AdjacentNodesFinder<Piece> knightAdjacentNodesFinder = new KnightAdjacentNodesFinder();
         Graph<Piece> knightGraph = new Graph<>(knightAdjacentNodesFinder);

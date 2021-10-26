@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static com.xm.model.data.Piece.createPieceFromCoordinates;
 import static java.util.stream.Collectors.toUnmodifiableSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,19 +22,22 @@ class AdjacentNodesFinderTest {
     @Test
     void testKnightAdjacentGetter() {
         AdjacentNodesFinder<Piece> adjacentNodesFinder = new KnightAdjacentNodesFinder();
-        Set<Node<Piece>> adjacent = adjacentNodesFinder.getAdjacent(new Node<>(new Piece(Coordinates.valueOf(5, 1))));
+
+        Set<Node<Piece>> adjacent = adjacentNodesFinder.getAdjacent(new Node<>(createPieceFromCoordinates(
+                Coordinates.valueOf(5, 1))));
+
         log.info("{}", adjacent);
         assertThat(adjacent).hasSameElementsAs(getExpectedNodes());
     }
 
     private Set<Node<Piece>> getExpectedNodes() {
         return Stream.of(
-                        new Node<>(new Piece(Coordinates.valueOf(3, 0))),
-                        new Node<>(new Piece(Coordinates.valueOf(3, 2))),
-                        new Node<>(new Piece(Coordinates.valueOf(4, 3))),
-                        new Node<>(new Piece(Coordinates.valueOf(6, 3))),
-                        new Node<>(new Piece(Coordinates.valueOf(7, 2))),
-                        new Node<>(new Piece(Coordinates.valueOf(7, 0)))
+                        new Node<>(createPieceFromCoordinates(Coordinates.valueOf(3, 0))),
+                        new Node<>(createPieceFromCoordinates(Coordinates.valueOf(3, 2))),
+                        new Node<>(createPieceFromCoordinates(Coordinates.valueOf(4, 3))),
+                        new Node<>(createPieceFromCoordinates(Coordinates.valueOf(6, 3))),
+                        new Node<>(createPieceFromCoordinates(Coordinates.valueOf(7, 2))),
+                        new Node<>(createPieceFromCoordinates(Coordinates.valueOf(7, 0)))
                 )
                 .filter(node -> isWithinBoard(node.getData().getCoordinates()))
                 .collect(toUnmodifiableSet());

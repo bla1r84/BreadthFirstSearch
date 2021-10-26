@@ -1,35 +1,34 @@
 package com.xm.utils;
 
+import com.xm.model.Coordinates;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Properties;
-
+import static com.xm.utils.Constants.*;
 import static org.apache.commons.lang3.math.NumberUtils.toInt;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Settings {
 
-    private static final String START_X = "piece.start.x";
-    private static final String START_Y = "piece.start.y";
-    private static final String TARGET_X = "piece.target.x";
-    private static final String TARGET_Y = "piece.target.y";
-
     public static final int MAX_ALLOWED_MOVES;
-    public static final Pair<Integer, Integer> START;
-    public static final Pair<Integer, Integer> TARGET;
+    public static final Coordinates START;
+    public static final Coordinates TARGET;
 
     static {
-        Properties properties = PropertiesReader.getApplicationProperties();
+        XParser xParser = XParser.getInstance();
+        YParser yParser = YParser.getInstance();
 
-        MAX_ALLOWED_MOVES = toInt(properties.getProperty("max-allowed-moves"));
+        MAX_ALLOWED_MOVES = toInt(PropertiesReader.getApplicationProperties().getProperty("max-allowed-moves"));
 
-        int startX = LetterToNumberMapper.getMap().get(properties.getProperty(START_X));
-        int targetX = LetterToNumberMapper.getMap().get(properties.getProperty(TARGET_X));
+        int startX = xParser.parseX(START_X);
+        int startY = yParser.parseY(START_Y);
 
-        START = Pair.of(startX, toInt(properties.getProperty(START_Y)) - 1);
-        TARGET = Pair.of(targetX, toInt(properties.getProperty(TARGET_Y)) - 1);
+        int targetX = xParser.parseX(TARGET_X);
+        int targetY = yParser.parseY(TARGET_Y);
+
+        START = Coordinates.valueOf(startX, startY);
+        TARGET = Coordinates.valueOf(targetX, targetY);
     }
+
 
 }
