@@ -1,0 +1,14 @@
+com\xm\model\Node.class
+com\xm\exceptions\ExceededMaxMovesException.class
+com\xm\adjacentgetter\KnightAdjacentGetter.class
+com\xm\adjacentgetter\RookAdjacentGetter.class
+com\xm\utils\ChessBoardDimensions.class
+com\xm\utils\PathLogger.class
+com\xm\model\Coordinates.class
+com\xm\exceptions\UnreachableSquareException.class
+com\xm\Graph.class
+com\xm\adjacentgetter\AdjacentGetter.class
+com\xm\model\piece\Knight.class
+com\xm\model\piece\Rook.class
+com\xm\utils\Settings.class
+com\xm\model\piece\Piece.class
