@@ -1,8 +1,8 @@
 package com.xm.adjacentgetter;
 
 import com.xm.exceptions.UnreachableTargetException;
-import com.xm.model.data.MyInteger;
 import com.xm.model.Node;
+import com.xm.model.data.MyInteger;
 
 import java.util.Set;
 

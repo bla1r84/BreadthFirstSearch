@@ -17,7 +17,10 @@ public class KnightAdjacentNodesFinder implements AdjacentNodesFinder<Piece> {
     @Override
     public Set<Node<Piece>> getAdjacent(Node<Piece> currentKnightNode) {
         Set<Node<Piece>> allPossible = getAllPossible(currentKnightNode);
-        return allPossible.stream().filter(this::isValid).collect(toSet());
+
+        return allPossible.stream()
+                .filter(this::isValid)
+                .collect(toSet());
     }
 
     private Set<Node<Piece>> getAllPossible(Node<Piece> currentKnightNode) {

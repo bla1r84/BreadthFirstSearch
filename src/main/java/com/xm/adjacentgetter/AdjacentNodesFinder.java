@@ -1,7 +1,7 @@
 package com.xm.adjacentgetter;
 
-import com.xm.model.data.Data;
 import com.xm.model.Node;
+import com.xm.model.data.Data;
 
 import java.util.Set;
 

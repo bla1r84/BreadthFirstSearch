@@ -12,6 +12,13 @@ public class YParser {
 
     private final Properties properties = PropertiesReader.getApplicationProperties();
 
+    public static YParser getInstance() {
+        if (instance == null) {
+            instance = new YParser();
+        }
+        return instance;
+    }
+
     public int parseY(String yProperty) {
         int y = Integer.parseInt(properties.getProperty(yProperty));
 
@@ -21,13 +28,6 @@ public class YParser {
         }
 
         return y - 1;
-    }
-
-    public static YParser getInstance() {
-        if (instance == null) {
-            instance = new YParser();
-        }
-        return instance;
     }
 
 }

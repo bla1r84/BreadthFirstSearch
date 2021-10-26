@@ -9,11 +9,10 @@ import java.util.Properties;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChessBoardDimensions {
 
-    private static final String CHESSBOARD_DIMENSIONS_X = "chessboard.dimensions.x";
-    private static final String CHESSBOARD_DIMENSIONS_Y = "chessboard.dimensions.y";
-
     public static final int X;
     public static final int Y;
+    private static final String CHESSBOARD_DIMENSIONS_X = "chessboard.dimensions.x";
+    private static final String CHESSBOARD_DIMENSIONS_Y = "chessboard.dimensions.y";
 
     static {
         Properties properties = PropertiesReader.getApplicationProperties();
