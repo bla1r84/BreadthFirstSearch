@@ -38,15 +38,22 @@ class BreadFirstSearchTest {
                 Settings.START.x,
                 Settings.START.y)));
 
+        log.info("Starting Coordinates: {},{}",
+                knightStart.getData().getCoordinates().x,
+                knightStart.getData().getCoordinates().y);
+
         Node<Piece> knightTarget = new Node<>(createPieceFromCoordinates(Coordinates.valueOf(
                 Settings.TARGET.x,
                 Settings.TARGET.y)));
+
+        log.info("Target Coordinates: {},{}",
+                knightTarget.getData().getCoordinates().x,
+                knightTarget.getData().getCoordinates().y);
 
         AdjacentNodesFinder<Piece> knightAdjacentNodesFinder = new KnightAdjacentNodesFinder();
         Graph<Piece> knightGraph = new Graph<>(knightAdjacentNodesFinder);
 
         Deque<Node<Piece>> finalPath = knightGraph.breadthFirstSearch(knightStart, knightTarget);
-        log.info("{}", finalPath.peekLast());
         CoordinatesPathLogger.logPath(finalPath);
 
         Node<Piece> last = finalPath.peekLast();

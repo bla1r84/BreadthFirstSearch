@@ -29,7 +29,6 @@ import static com.xm.utils.Settings.MAX_ALLOWED_MOVES;
  * @param <T> the type of Data the Nodes of the Graph contain
  */
 @RequiredArgsConstructor
-@Slf4j
 public class Graph<T extends Data> {
 
     private final AdjacentNodesFinder<T> adjacentNodesFinder;
