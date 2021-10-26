@@ -11,8 +11,8 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode
 @ToString
-public abstract class Piece implements Data {
+public class Piece implements Data {
 
-    protected final Coordinates coordinates;
+    private final Coordinates coordinates;
 
 }

@@ -1,19 +1,16 @@
 package com.xm.model;
 
-import com.xm.adjacentgetter.AdjacentGetter;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Set;
+import lombok.ToString;
 
 @RequiredArgsConstructor
 @Getter
-public class MyInteger implements Data, AdjacentGetter<MyInteger> {
+@ToString
+@EqualsAndHashCode
+public class MyInteger implements Data {
 
     private final Integer integer;
 
-    @Override
-    public Set<Node<MyInteger>> getAdjacent(Node<MyInteger> current) {
-        return null;
-    }
 }

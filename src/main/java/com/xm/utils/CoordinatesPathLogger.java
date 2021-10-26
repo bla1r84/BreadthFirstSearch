@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Slf4j
-public class PathLogger {
+public class CoordinatesPathLogger {
 
     public static <T extends Piece> void logPath(Deque<T> path) {
         log.info("Minimum jumps required: {}", path.size() - 1);

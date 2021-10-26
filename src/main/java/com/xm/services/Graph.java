@@ -1,15 +1,10 @@
-package com.xm;
+package com.xm.services;
 
 import com.xm.adjacentgetter.AdjacentGetter;
-import com.xm.adjacentgetter.KnightAdjacentGetter;
 import com.xm.exceptions.ExceededMaxMovesException;
-import com.xm.exceptions.UnreachableSquareException;
-import com.xm.model.Coordinates;
+import com.xm.exceptions.UnreachableTargetException;
 import com.xm.model.Data;
 import com.xm.model.Node;
-import com.xm.model.piece.Knight;
-import com.xm.utils.PathLogger;
-import com.xm.utils.Settings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,7 +52,7 @@ public class Graph<T extends Data> {
             }
         }
 
-        throw new UnreachableSquareException("End position is unreachable!");
+        throw new UnreachableTargetException("End position is unreachable!");
     }
 
     private Deque<T> reconstructPath(Node<T> start, Node<T> target) {
@@ -65,32 +60,13 @@ public class Graph<T extends Data> {
         Node<T> current = visited.get(target);
 
         while (!current.equals(start)) {
-            path.push(current.getPiece());
+            path.push(current.getData());
             current = current.getPrevious();
         }
 
-        path.push(start.getPiece());
+        path.push(start.getData());
 
         return path;
-    }
-
-    public static void main(String[] args) {
-        long start = System.currentTimeMillis();
-
-        Node<Knight> knightStart = new Node<>(new Knight(Coordinates.valueOf(
-                Settings.START.getLeft(),
-                Settings.START.getRight())));
-
-        Node<Knight> knightTarget = new Node<>(new Knight(Coordinates.valueOf(
-                Settings.TARGET.getLeft(),
-                Settings.TARGET.getRight())));
-
-        AdjacentGetter<Knight> knightAdjacentGetter = new KnightAdjacentGetter();
-        Graph<Knight> knightGraph = new Graph<>(knightAdjacentGetter);
-
-        PathLogger.logPath(knightGraph.bfs(knightStart, knightTarget));
-        long end = System.currentTimeMillis();
-        log.info("Time taken for knight: {} ms ", end - start);
     }
 
 }

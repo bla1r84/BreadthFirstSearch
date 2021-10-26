@@ -10,7 +10,7 @@ import lombok.*;
 public class Node<T extends Data> {
 
     @EqualsAndHashCode.Include
-    private final T piece;
+    private final T data;
 
     private Node<T> previous;
     private int depth;

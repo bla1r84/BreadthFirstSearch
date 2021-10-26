@@ -4,7 +4,7 @@ import com.xm.adjacentgetter.AdjacentGetter;
 import com.xm.adjacentgetter.KnightAdjacentGetter;
 import com.xm.model.Coordinates;
 import com.xm.model.Node;
-import com.xm.model.piece.Knight;
+import com.xm.model.piece.Piece;
 import com.xm.utils.ChessBoardDimensions;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -20,22 +20,22 @@ class AdjacentGetterTest {
 
     @Test
     void testKnightAdjacentGetter() {
-        AdjacentGetter<Knight> adjacentGetter = new KnightAdjacentGetter();
-        Set<Node<Knight>> adjacent = adjacentGetter.getAdjacent(new Node<>(new Knight(Coordinates.valueOf(5, 1))));
+        AdjacentGetter<Piece> adjacentGetter = new KnightAdjacentGetter();
+        Set<Node<Piece>> adjacent = adjacentGetter.getAdjacent(new Node<>(new Piece(Coordinates.valueOf(5, 1))));
         log.info("{}", adjacent);
         assertThat(adjacent).hasSameElementsAs(getExpectedNodes());
     }
 
-    private Set<Node<Knight>> getExpectedNodes() {
+    private Set<Node<Piece>> getExpectedNodes() {
         return Stream.of(
-                        new Node<>(new Knight(Coordinates.valueOf(3, 0))),
-                        new Node<>(new Knight(Coordinates.valueOf(3, 2))),
-                        new Node<>(new Knight(Coordinates.valueOf(4, 3))),
-                        new Node<>(new Knight(Coordinates.valueOf(6, 3))),
-                        new Node<>(new Knight(Coordinates.valueOf(7, 2))),
-                        new Node<>(new Knight(Coordinates.valueOf(7, 0)))
+                        new Node<>(new Piece(Coordinates.valueOf(3, 0))),
+                        new Node<>(new Piece(Coordinates.valueOf(3, 2))),
+                        new Node<>(new Piece(Coordinates.valueOf(4, 3))),
+                        new Node<>(new Piece(Coordinates.valueOf(6, 3))),
+                        new Node<>(new Piece(Coordinates.valueOf(7, 2))),
+                        new Node<>(new Piece(Coordinates.valueOf(7, 0)))
                 )
-                .filter(node -> isWithinBoard(node.getPiece().getCoordinates()))
+                .filter(node -> isWithinBoard(node.getData().getCoordinates()))
                 .collect(toUnmodifiableSet());
     }
 
