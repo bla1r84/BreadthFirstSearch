@@ -1,11 +1,11 @@
 package com.xm.adjacentgetter;
 
-import com.xm.model.Data;
+import com.xm.model.data.Data;
 import com.xm.model.Node;
 
 import java.util.Set;
 
-public interface AdjacentGetter<T extends Data> {
+public interface AdjacentNodesFinder<T extends Data> {
 
     /**
      * Gets the current node (i.e. position) and returns the valid next moves. Implementation will vary depending on

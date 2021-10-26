@@ -1,10 +1,11 @@
 package com.xm.services;
 
-import com.xm.adjacentgetter.AdjacentGetter;
+import com.xm.adjacentgetter.AdjacentNodesFinder;
 import com.xm.exceptions.ExceededMaxMovesException;
 import com.xm.exceptions.UnreachableTargetException;
-import com.xm.model.Data;
+import com.xm.model.data.Data;
 import com.xm.model.Node;
+import com.xm.utils.PathTraverser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,15 +16,27 @@ import java.util.Map;
 
 import static com.xm.utils.Settings.MAX_ALLOWED_MOVES;
 
+/**
+ * <p>
+ * The Graph that uses breadth first search in order to find and return the path from the designated start to the
+ * designated target. Breadth search first visits each node and finds its adjacent nodes based on some logic. For
+ * example for chess pieces, the adjacent nodes are the squares that the piece can validly move to.
+ *
+ * <p>
+ * The graph is fed the logic for finding the adjacent nodes through its constructor. The field adjacentNodesFinder
+ * can be implemented in various ways and not necessarily only for chess pieces.
+ *
+ * @param <T> the type of Data the Nodes of the Graph contain
+ */
 @RequiredArgsConstructor
 @Slf4j
 public class Graph<T extends Data> {
 
-    private final AdjacentGetter<T> adjacentGetter;
-    private final Map<Node<T>, Node<T>> visited = new HashMap<>();
+    private final AdjacentNodesFinder<T> adjacentNodesFinder;
 
-    public Deque<T> bfs(Node<T> start, Node<T> target) {
+    public Deque<T> breadthFirstSearch(Node<T> start, Node<T> target) {
         Deque<Node<T>> deque = new ArrayDeque<>();
+        Map<Node<T>, Node<T>> visited = new HashMap<>();
 
         start.setDepth(0);
         visited.put(start, start);
@@ -39,10 +52,10 @@ public class Graph<T extends Data> {
             }
 
             if (current.equals(target)) {
-                return reconstructPath(start, target);
+                return PathTraverser.traversePath(start, target, visited);
             }
 
-            for (Node<T> n : adjacentGetter.getAdjacent(current)) {
+            for (Node<T> n : adjacentNodesFinder.getAdjacent(current)) {
                 visited.computeIfAbsent(n, node -> {
                     node.setPrevious(current);
                     node.setDepth(current.getDepth() + 1);
@@ -53,20 +66,6 @@ public class Graph<T extends Data> {
         }
 
         throw new UnreachableTargetException("End position is unreachable!");
-    }
-
-    private Deque<T> reconstructPath(Node<T> start, Node<T> target) {
-        Deque<T> path = new ArrayDeque<>();
-        Node<T> current = visited.get(target);
-
-        while (!current.equals(start)) {
-            path.push(current.getData());
-            current = current.getPrevious();
-        }
-
-        path.push(start.getData());
-
-        return path;
     }
 
 }

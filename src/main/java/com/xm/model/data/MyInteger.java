@@ -1,4 +1,4 @@
-package com.xm.model;
+package com.xm.model.data;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

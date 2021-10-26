@@ -2,7 +2,7 @@ package com.xm.adjacentgetter;
 
 import com.xm.model.Coordinates;
 import com.xm.model.Node;
-import com.xm.model.piece.Piece;
+import com.xm.model.data.Piece;
 import com.xm.utils.ChessBoardDimensions;
 import lombok.RequiredArgsConstructor;
 
@@ -11,7 +11,7 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 @RequiredArgsConstructor
-public class KnightAdjacentGetter implements AdjacentGetter<Piece> {
+public class KnightAdjacentNodesFinder implements AdjacentNodesFinder<Piece> {
 
     @Override
     public Set<Node<Piece>> getAdjacent(Node<Piece> currentKnightNode) {

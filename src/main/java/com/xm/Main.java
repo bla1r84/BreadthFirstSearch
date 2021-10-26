@@ -1,10 +1,10 @@
 package com.xm;
 
-import com.xm.adjacentgetter.AdjacentGetter;
-import com.xm.adjacentgetter.KnightAdjacentGetter;
+import com.xm.adjacentgetter.AdjacentNodesFinder;
+import com.xm.adjacentgetter.KnightAdjacentNodesFinder;
 import com.xm.model.Coordinates;
 import com.xm.model.Node;
-import com.xm.model.piece.Piece;
+import com.xm.model.data.Piece;
 import com.xm.services.Graph;
 import com.xm.utils.CoordinatesPathLogger;
 import com.xm.utils.Settings;
@@ -24,10 +24,10 @@ public class Main {
                 Settings.TARGET.getLeft(),
                 Settings.TARGET.getRight())));
 
-        AdjacentGetter<Piece> knightAdjacentGetter = new KnightAdjacentGetter();
-        Graph<Piece> knightGraph = new Graph<>(knightAdjacentGetter);
+        AdjacentNodesFinder<Piece> knightAdjacentNodesFinder = new KnightAdjacentNodesFinder();
+        Graph<Piece> knightGraph = new Graph<>(knightAdjacentNodesFinder);
 
-        CoordinatesPathLogger.logPath(knightGraph.bfs(knightStart, knightTarget));
+        CoordinatesPathLogger.logPath(knightGraph.breadthFirstSearch(knightStart, knightTarget));
         long end = System.currentTimeMillis();
         log.info("Time taken for knight: {} ms ", end - start);
     }

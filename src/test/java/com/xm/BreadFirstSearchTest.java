@@ -1,12 +1,12 @@
 package com.xm;
 
-import com.xm.adjacentgetter.AdjacentGetter;
-import com.xm.adjacentgetter.KnightAdjacentGetter;
-import com.xm.adjacentgetter.MyIntegerAdjacentGetter;
+import com.xm.adjacentgetter.AdjacentNodesFinder;
+import com.xm.adjacentgetter.KnightAdjacentNodesFinder;
+import com.xm.adjacentgetter.MyIntegerAdjacentNodesFinder;
 import com.xm.model.Coordinates;
-import com.xm.model.MyInteger;
+import com.xm.model.data.MyInteger;
 import com.xm.model.Node;
-import com.xm.model.piece.Piece;
+import com.xm.model.data.Piece;
 import com.xm.services.Graph;
 import com.xm.utils.CoordinatesPathLogger;
 import com.xm.utils.Settings;
@@ -24,9 +24,9 @@ class BreadFirstSearchTest {
     void testBFSForMyInteger() {
         Node<MyInteger> myIntegerStart = new Node<>(new MyInteger(2));
         Node<MyInteger> myIntegerTarget = new Node<>(new MyInteger(1));
-        AdjacentGetter<MyInteger> myIntegerAdjacentGetter = new MyIntegerAdjacentGetter();
-        Graph<MyInteger> integerGraph = new Graph<>(myIntegerAdjacentGetter);
-        Deque<MyInteger> deque = integerGraph.bfs(myIntegerStart, myIntegerTarget);
+        AdjacentNodesFinder<MyInteger> myIntegerAdjacentNodesFinder = new MyIntegerAdjacentNodesFinder();
+        Graph<MyInteger> integerGraph = new Graph<>(myIntegerAdjacentNodesFinder);
+        Deque<MyInteger> deque = integerGraph.breadthFirstSearch(myIntegerStart, myIntegerTarget);
         log.info("{}", deque);
         assertThat(deque.size()).isEqualTo(3);
     }
@@ -41,10 +41,10 @@ class BreadFirstSearchTest {
                 Settings.TARGET.getLeft(),
                 Settings.TARGET.getRight())));
 
-        AdjacentGetter<Piece> knightAdjacentGetter = new KnightAdjacentGetter();
-        Graph<Piece> knightGraph = new Graph<>(knightAdjacentGetter);
+        AdjacentNodesFinder<Piece> knightAdjacentNodesFinder = new KnightAdjacentNodesFinder();
+        Graph<Piece> knightGraph = new Graph<>(knightAdjacentNodesFinder);
 
-        CoordinatesPathLogger.logPath(knightGraph.bfs(knightStart, knightTarget));
+        CoordinatesPathLogger.logPath(knightGraph.breadthFirstSearch(knightStart, knightTarget));
     }
 
 }

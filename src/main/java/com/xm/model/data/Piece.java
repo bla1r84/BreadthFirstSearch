@@ -1,7 +1,6 @@
-package com.xm.model.piece;
+package com.xm.model.data;
 
 import com.xm.model.Coordinates;
-import com.xm.model.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

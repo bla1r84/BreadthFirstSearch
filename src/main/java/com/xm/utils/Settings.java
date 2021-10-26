@@ -24,8 +24,12 @@ public class Settings {
         Properties properties = PropertiesReader.getApplicationProperties();
 
         MAX_ALLOWED_MOVES = toInt(properties.getProperty("max-allowed-moves"));
-        START = Pair.of(toInt(properties.getProperty(START_X)), toInt(properties.getProperty(START_Y)));
-        TARGET = Pair.of(toInt(properties.getProperty(TARGET_X)), toInt(properties.getProperty(TARGET_Y)));
+
+        int startX = LetterToNumberMapper.getMap().get(properties.getProperty(START_X));
+        int targetX = LetterToNumberMapper.getMap().get(properties.getProperty(TARGET_X));
+
+        START = Pair.of(startX, toInt(properties.getProperty(START_Y)) - 1);
+        TARGET = Pair.of(targetX, toInt(properties.getProperty(TARGET_Y)) - 1);
     }
 
 }

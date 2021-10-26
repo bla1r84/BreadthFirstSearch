@@ -1,10 +1,10 @@
 package com.xm;
 
-import com.xm.adjacentgetter.AdjacentGetter;
-import com.xm.adjacentgetter.KnightAdjacentGetter;
+import com.xm.adjacentgetter.AdjacentNodesFinder;
+import com.xm.adjacentgetter.KnightAdjacentNodesFinder;
 import com.xm.model.Coordinates;
 import com.xm.model.Node;
-import com.xm.model.piece.Piece;
+import com.xm.model.data.Piece;
 import com.xm.utils.ChessBoardDimensions;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -16,12 +16,12 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-class AdjacentGetterTest {
+class AdjacentNodesFinderTest {
 
     @Test
     void testKnightAdjacentGetter() {
-        AdjacentGetter<Piece> adjacentGetter = new KnightAdjacentGetter();
-        Set<Node<Piece>> adjacent = adjacentGetter.getAdjacent(new Node<>(new Piece(Coordinates.valueOf(5, 1))));
+        AdjacentNodesFinder<Piece> adjacentNodesFinder = new KnightAdjacentNodesFinder();
+        Set<Node<Piece>> adjacent = adjacentNodesFinder.getAdjacent(new Node<>(new Piece(Coordinates.valueOf(5, 1))));
         log.info("{}", adjacent);
         assertThat(adjacent).hasSameElementsAs(getExpectedNodes());
     }

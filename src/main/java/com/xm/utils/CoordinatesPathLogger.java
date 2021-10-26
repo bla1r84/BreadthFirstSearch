@@ -1,13 +1,17 @@
 package com.xm.utils;
 
-import com.xm.model.piece.Piece;
+import com.xm.model.data.Piece;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Deque;
 import java.util.Iterator;
+import java.util.Map;
 
+/**
+ * Utility class to output the path from start to target
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Slf4j
 public class CoordinatesPathLogger {
@@ -18,6 +22,8 @@ public class CoordinatesPathLogger {
     }
 
     private static <T extends Piece> String generatePathString(Deque<T> path) {
+        Map<Integer, String> numberToLetterMap = NumberToLetterMapper.getMap();
+
         StringBuilder stringBuilder = new StringBuilder();
 
         Iterator<T> iterator = path.iterator();
@@ -25,9 +31,13 @@ public class CoordinatesPathLogger {
         while (iterator.hasNext()) {
             T piece = iterator.next();
             stringBuilder.append("(");
-            stringBuilder.append(piece.getCoordinates().x);
+
+            stringBuilder.append(numberToLetterMap.getOrDefault(
+                    piece.getCoordinates().x,
+                    String.valueOf(piece.getCoordinates().x)));
+
             stringBuilder.append(" ");
-            stringBuilder.append(piece.getCoordinates().y);
+            stringBuilder.append(piece.getCoordinates().y + 1);
             stringBuilder.append(")");
             if (iterator.hasNext()) {
                 stringBuilder.append(" -> ");

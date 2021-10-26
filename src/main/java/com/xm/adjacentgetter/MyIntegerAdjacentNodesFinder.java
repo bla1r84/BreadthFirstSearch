@@ -1,12 +1,12 @@
 package com.xm.adjacentgetter;
 
 import com.xm.exceptions.UnreachableTargetException;
-import com.xm.model.MyInteger;
+import com.xm.model.data.MyInteger;
 import com.xm.model.Node;
 
 import java.util.Set;
 
-public class MyIntegerAdjacentGetter implements AdjacentGetter<MyInteger> {
+public class MyIntegerAdjacentNodesFinder implements AdjacentNodesFinder<MyInteger> {
 
     /**
      * Just some random logic for finding the next possible integers to move to.
