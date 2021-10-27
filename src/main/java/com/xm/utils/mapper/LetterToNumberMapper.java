@@ -1,14 +1,15 @@
-package com.xm.utils;
+package com.xm.utils.mapper;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LetterToNumberMapper {
 
-    public static final Map<String, Integer> letterToNumberMap = Map.of(
+    private static final Map<String, Integer> letterToNumberMap = Map.of(
             "A", 0,
             "B", 1,
             "C", 2,
@@ -18,5 +19,9 @@ public class LetterToNumberMapper {
             "G", 6,
             "H", 7
     );
+
+    public static Map<String, Integer> getLetterToNumberMap() {
+        return new HashMap<>(letterToNumberMap);
+    }
 
 }

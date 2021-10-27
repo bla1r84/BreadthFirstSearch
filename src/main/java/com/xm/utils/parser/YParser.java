@@ -1,5 +1,7 @@
-package com.xm.utils;
+package com.xm.utils.parser;
 
+import com.xm.utils.ChessBoardDimensions;
+import com.xm.utils.PropertiesReader;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

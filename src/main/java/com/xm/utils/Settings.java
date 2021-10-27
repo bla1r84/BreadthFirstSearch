@@ -1,6 +1,8 @@
 package com.xm.utils;
 
 import com.xm.model.Coordinates;
+import com.xm.utils.parser.XParser;
+import com.xm.utils.parser.YParser;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 

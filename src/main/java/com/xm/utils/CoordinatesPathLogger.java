@@ -2,6 +2,7 @@ package com.xm.utils;
 
 import com.xm.model.Node;
 import com.xm.model.data.Piece;
+import com.xm.utils.mapper.NumberToLetterMapper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +26,7 @@ public class CoordinatesPathLogger {
     }
 
     private static <T extends Piece> String generatePathString(Deque<Node<T>> path) {
-        Map<Integer, String> numberToLetterMap = NumberToLetterMapper.numberToLetterMap;
+        Map<Integer, String> numberToLetterMap = NumberToLetterMapper.getNumberToLetterMap();
 
         StringBuilder stringBuilder = new StringBuilder();
 

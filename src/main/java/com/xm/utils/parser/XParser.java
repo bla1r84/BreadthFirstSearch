@@ -1,5 +1,8 @@
-package com.xm.utils;
+package com.xm.utils.parser;
 
+import com.xm.utils.ChessBoardDimensions;
+import com.xm.utils.PropertiesReader;
+import com.xm.utils.mapper.LetterToNumberMapper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -24,7 +27,7 @@ public class XParser {
     public int parseX(String xProperty) {
         String xFromProperties = properties.getProperty(xProperty);
 
-        if (!LetterToNumberMapper.letterToNumberMap.containsKey(xFromProperties)) {
+        if (!LetterToNumberMapper.getLetterToNumberMap().containsKey(xFromProperties)) {
             int x = toInt(xFromProperties);
             if (x <= 0 || x > ChessBoardDimensions.X) {
                 throw new IllegalArgumentException("Invalid " + xProperty + " given (" + x + "). Must be between 0" +
@@ -32,7 +35,7 @@ public class XParser {
             }
         }
 
-        return LetterToNumberMapper.letterToNumberMap.getOrDefault(
+        return LetterToNumberMapper.getLetterToNumberMap().getOrDefault(
                 properties.getProperty(xProperty),
                 toInt(properties.getProperty(xProperty)) - 1);
     }

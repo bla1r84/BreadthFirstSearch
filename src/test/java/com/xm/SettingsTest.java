@@ -1,6 +1,10 @@
 package com.xm;
 
-import com.xm.utils.*;
+import com.xm.utils.ChessBoardDimensions;
+import com.xm.utils.PropertiesReader;
+import com.xm.utils.mapper.LetterToNumberMapper;
+import com.xm.utils.parser.XParser;
+import com.xm.utils.parser.YParser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,7 +36,7 @@ class SettingsTest {
         int startX = xParser.parseX(START_X);
         log.info("startX: {}", startX);
 
-        if (!LetterToNumberMapper.letterToNumberMap.containsKey(propStartX)) {
+        if (!LetterToNumberMapper.getLetterToNumberMap().containsKey(propStartX)) {
             assertThat(startX).isEqualTo(NumberUtils.toInt(propStartX) - 1);
         } else {
             assertThat(startX).isBetween(0, 7);

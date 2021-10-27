@@ -4,8 +4,8 @@ import com.xm.adjacentgetter.AdjacentNodesFinder;
 import com.xm.adjacentgetter.KnightAdjacentNodesFinder;
 import com.xm.adjacentgetter.MyIntegerAdjacentNodesFinder;
 import com.xm.model.Coordinates;
-import com.xm.model.data.MyInteger;
 import com.xm.model.Node;
+import com.xm.model.data.MyInteger;
 import com.xm.model.data.Piece;
 import com.xm.services.Graph;
 import com.xm.utils.CoordinatesPathLogger;
@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Deque;
 
 import static com.xm.model.data.Piece.createPieceFromCoordinates;
+import static java.util.stream.Collectors.joining;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -28,7 +29,13 @@ class BreadFirstSearchTest {
         AdjacentNodesFinder<MyInteger> myIntegerAdjacentNodesFinder = new MyIntegerAdjacentNodesFinder();
         Graph<MyInteger> integerGraph = new Graph<>(myIntegerAdjacentNodesFinder);
         Deque<Node<MyInteger>> deque = integerGraph.breadthFirstSearch(myIntegerStart, myIntegerTarget);
-        log.info("{}", deque);
+
+        log.info("Path: {}", deque.stream()
+                .map(node -> node.getData().getInteger())
+                .map(String::valueOf)
+                .collect(joining(" -> ")));
+
+
         assertThat(deque.size()).isEqualTo(3);
     }
 
