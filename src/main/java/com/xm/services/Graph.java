@@ -1,6 +1,5 @@
 package com.xm.services;
 
-import com.xm.adjacentgetter.AdjacentNodesFinder;
 import com.xm.exceptions.ExceededMaxMovesException;
 import com.xm.exceptions.UnreachableTargetException;
 import com.xm.model.Node;
@@ -28,9 +27,7 @@ import static com.xm.utils.Settings.MAX_ALLOWED_MOVES;
  * @param <T> the type of Data the Nodes of the Graph contain
  */
 @RequiredArgsConstructor
-public class Graph<T extends Data> {
-
-    private final AdjacentNodesFinder<T> adjacentNodesFinder;
+public class Graph<T extends Data<T>> {
 
     public Deque<Node<T>> breadthFirstSearch(Node<T> start, Node<T> target) {
         Deque<Node<T>> deque = new ArrayDeque<>();
@@ -53,8 +50,8 @@ public class Graph<T extends Data> {
                 return PathTraverser.traversePath(start, target, visited);
             }
 
-            for (Node<T> n : adjacentNodesFinder.getAdjacent(current)) {
-                deque.add(visited.computeIfAbsent(n, node -> Node.<T>builder()
+            for (Data<T> adj : current.getData().getAdjacent()) {
+                deque.add(visited.computeIfAbsent(new Node<>(adj), node -> Node.<T>builder()
                         .data(node.getData())
                         .previous(current)
                         .depth(current.getDepth() + 1)

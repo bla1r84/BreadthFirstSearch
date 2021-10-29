@@ -22,10 +22,10 @@ import lombok.*;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @Builder
-public class Node<T extends Data> {
+public class Node<T extends Data<T>> {
 
     @EqualsAndHashCode.Include
-    private final T data;
+    private final Data<T> data;
 
     @ToString.Exclude
     private Node<T> previous;
