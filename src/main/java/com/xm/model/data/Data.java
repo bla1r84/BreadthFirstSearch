@@ -9,11 +9,10 @@ import java.util.Set;
 public interface Data<T> {
 
     /**
-     * Gets the current node (i.e. position) and returns the valid next moves. Implementation will vary depending on
-     * the type of piece. In fact, the item in question might not even be a chess piece, but rather something else with
-     * a different implementation, totally unrelated to chess.
+     * Evaluates all the Edges of the Vertex. Implementation will vary depending on the type of data. The item in
+     * question doesn't necessarily have to be a chess piece, it can be anything else.
      *
-     * @return a Set of all the valid Nodes the item can move to
+     * @return a Set of all the Edges of the Vertex
      */
     Set<T> getAdjacent();
 

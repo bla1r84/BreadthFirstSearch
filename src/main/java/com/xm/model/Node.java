@@ -13,7 +13,7 @@ import lombok.*;
  * <p>
  * <b>depth</b> is the number of steps we had to make in order to reach this Node
  *
- * @param <T> the type of Data the Nodes of the Graph contain
+ * @param <T> the type of Data the Nodes of the Graph will contain
  */
 @RequiredArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

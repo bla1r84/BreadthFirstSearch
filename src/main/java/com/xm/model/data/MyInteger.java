@@ -19,7 +19,7 @@ public class MyInteger implements Data<MyInteger> {
     /**
      * Just some random logic for finding the next possible integers to move to.
      *
-     * @return a Set of all the valid Nodes the item can move to
+     * @return a Set of all the Edges of Integer
      */
     @Override
     public Set<MyInteger> getAdjacent() {
