@@ -51,12 +51,18 @@ public class Graph<T extends Data<T>> {
             }
 
             for (Data<T> adj : current.getData().getAdjacent()) {
-                deque.offer(visited.computeIfAbsent(new Node<>(adj), node -> Node.<T>builder()
-                        .data(node.getData())
+                Node<T> nodeFromData = Node.<T>builder()
+                        .data(adj)
                         .previous(current)
                         .depth(current.getDepth() + 1)
-                        .build()));
+                        .build();
+
+                visited.computeIfAbsent(nodeFromData, node -> {
+                    deque.offer(node);
+                    return node;
+                });
             }
+
         }
 
         throw new UnreachableTargetException("End position is unreachable!");
