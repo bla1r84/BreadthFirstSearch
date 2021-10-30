@@ -12,6 +12,10 @@ public class Rook extends Piece<Rook> {
         super(coordinates);
     }
 
+    public static Rook createPieceFromCoordinates(Coordinates coordinates) {
+        return new Rook(coordinates);
+    }
+
     @Override
     public Set<Rook> getAdjacent() {
         Set<Rook> set = new HashSet<>();
@@ -27,10 +31,6 @@ public class Rook extends Piece<Rook> {
         }
 
         return set;
-    }
-
-    public static Rook createPieceFromCoordinates(Coordinates coordinates) {
-        return new Rook(coordinates);
     }
 
 }

@@ -35,7 +35,7 @@ public class Graph<T extends Data<T>> {
 
         start.setDepth(0);
         visited.put(start, start);
-        deque.add(start);
+        deque.offer(start);
 
         while (!deque.isEmpty()) {
             Node<T> current = deque.poll();
@@ -51,7 +51,7 @@ public class Graph<T extends Data<T>> {
             }
 
             for (Data<T> adj : current.getData().getAdjacent()) {
-                deque.add(visited.computeIfAbsent(new Node<>(adj), node -> Node.<T>builder()
+                deque.offer(visited.computeIfAbsent(new Node<>(adj), node -> Node.<T>builder()
                         .data(node.getData())
                         .previous(current)
                         .depth(current.getDepth() + 1)

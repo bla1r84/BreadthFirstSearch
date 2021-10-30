@@ -13,6 +13,10 @@ public class Knight extends Piece<Knight> {
         super(coordinates);
     }
 
+    public static Knight createPieceFromCoordinates(Coordinates coordinates) {
+        return new Knight(coordinates);
+    }
+
     @Override
     public Set<Knight> getAdjacent() {
         Set<Knight> allPossible = getAllPossible();
@@ -63,10 +67,6 @@ public class Knight extends Piece<Knight> {
                 && knight.getCoordinates().x < ChessBoardDimensions.X
                 && knight.getCoordinates().y >= 0
                 && knight.getCoordinates().y < ChessBoardDimensions.Y;
-    }
-
-    public static Knight createPieceFromCoordinates(Coordinates coordinates) {
-        return new Knight(coordinates);
     }
 
 }
