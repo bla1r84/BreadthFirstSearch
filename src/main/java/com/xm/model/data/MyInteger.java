@@ -20,4 +20,5 @@ public class MyInteger implements Data<MyInteger> {
     public Set<MyInteger> accept(DataVisitor dv) {
         return dv.visitMyInteger(this);
     }
+
 }

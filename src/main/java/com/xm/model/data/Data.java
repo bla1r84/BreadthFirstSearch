@@ -11,8 +11,7 @@ import java.util.Set;
 public interface Data<T> {
 
     /**
-     * Evaluates all the Edges of the Vertex. Implementation will vary depending on the type of data. The item in
-     * question doesn't necessarily have to be a chess piece, it can be anything else.
+     * Evaluates all the Edges of the Vertex. The evaluation depends on passing in the DataEdgesVisitor.
      *
      * @return a Set of all the Edges of the Vertex
      */

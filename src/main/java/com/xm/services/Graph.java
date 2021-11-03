@@ -22,8 +22,8 @@ import static com.xm.utils.Settings.MAX_ALLOWED_MOVES;
  * example for chess pieces, the adjacent nodes are the squares that the piece can validly move to.
  *
  * <p>
- * The graph is fed the logic for finding the adjacent nodes through its constructor. The field adjacentNodesFinder
- * can be implemented in various ways and not necessarily only for chess pieces.
+ * The graph is fed the logic for finding the adjacent nodes through its constructor. The Visitor pattern has been used
+ * to determine the way the edges (adjacent nodes) of the vertex will be found.
  *
  * @param <T> the type of Data the Nodes of the Graph contain
  */
