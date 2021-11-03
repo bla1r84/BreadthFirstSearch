@@ -7,7 +7,10 @@ import com.xm.model.data.MyInteger;
 import com.xm.services.Graph;
 import com.xm.utils.CoordinatesPathLogger;
 import com.xm.utils.Settings;
+import com.xm.utils.visitors.DataEdgesVisitor;
+import com.xm.utils.visitors.DataVisitor;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Deque;
@@ -19,11 +22,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 class BreadFirstSearchTest {
 
+    private static DataVisitor dataVisitor;
+
+    @BeforeAll
+    static void setup() {
+        dataVisitor = new DataEdgesVisitor();
+    }
+
     @Test
     void testBFSForMyInteger() {
         Node<MyInteger> myIntegerStart = new Node<>(new MyInteger(2));
         Node<MyInteger> myIntegerTarget = new Node<>(new MyInteger(1));
-        Graph<MyInteger> integerGraph = new Graph<>();
+        Graph<MyInteger> integerGraph = new Graph<>(dataVisitor);
         Deque<Node<MyInteger>> deque = integerGraph.breadthFirstSearch(myIntegerStart, myIntegerTarget);
 
         log.info("Path: {}", deque.stream()
@@ -50,7 +60,7 @@ class BreadFirstSearchTest {
                 knightTarget.getCoordinates().y);
 
 
-        Graph<Knight> knightGraph = new Graph<>();
+        Graph<Knight> knightGraph = new Graph<>(dataVisitor);
 
         Deque<Node<Knight>> finalPath = knightGraph.breadthFirstSearch(new Node<>(knightStart), new Node<>(knightTarget));
         CoordinatesPathLogger.logPath(finalPath);

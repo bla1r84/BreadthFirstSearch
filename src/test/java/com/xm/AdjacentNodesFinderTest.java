@@ -3,6 +3,7 @@ package com.xm;
 import com.xm.model.Coordinates;
 import com.xm.model.data.Knight;
 import com.xm.utils.ChessBoardDimensions;
+import com.xm.utils.visitors.DataEdgesVisitor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class AdjacentNodesFinderTest {
 
     @Test
     void testKnightAdjacentGetter() {
-        Set<Knight> adjacent = createPieceFromCoordinates(Coordinates.valueOf(5, 1)).getAdjacent();
+        Set<Knight> adjacent = createPieceFromCoordinates(Coordinates.valueOf(5, 1)).accept(new DataEdgesVisitor());
 
         log.info("{}", adjacent);
         assertThat(adjacent).hasSameElementsAs(getExpectedNodes());

@@ -1,5 +1,7 @@
 package com.xm.model.data;
 
+import com.xm.utils.visitors.DataVisitor;
+
 import java.util.Set;
 
 /**
@@ -14,6 +16,6 @@ public interface Data<T> {
      *
      * @return a Set of all the Edges of the Vertex
      */
-    Set<T> getAdjacent();
+    Set<T> accept(DataVisitor dv);
 
 }

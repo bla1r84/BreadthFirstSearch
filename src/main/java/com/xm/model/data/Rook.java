@@ -1,9 +1,8 @@
 package com.xm.model.data;
 
 import com.xm.model.Coordinates;
-import com.xm.utils.ChessBoardDimensions;
+import com.xm.utils.visitors.DataVisitor;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Rook extends Piece<Rook> {
@@ -17,20 +16,8 @@ public class Rook extends Piece<Rook> {
     }
 
     @Override
-    public Set<Rook> getAdjacent() {
-        Set<Rook> set = new HashSet<>();
-
-        for (int i = this.getCoordinates().x + 1; i < ChessBoardDimensions.X; i++) {
-            int y = this.getCoordinates().y;
-            set.add(createPieceFromCoordinates(Coordinates.valueOf(i, y)));
-        }
-
-        for (int i = this.getCoordinates().y + 1; i < ChessBoardDimensions.Y; i++) {
-            int x = this.getCoordinates().x;
-            set.add(createPieceFromCoordinates(Coordinates.valueOf(x, i)));
-        }
-
-        return set;
+    public Set<Rook> accept(DataVisitor dv) {
+        return dv.visitRook(this);
     }
 
 }

@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode
 @ToString
-public abstract class Piece<T> implements Data<T> {
+public abstract class Piece<T extends Piece<T>> implements Data<T> {
 
     protected final Coordinates coordinates;
 

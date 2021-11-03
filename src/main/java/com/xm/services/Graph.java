@@ -5,6 +5,7 @@ import com.xm.exceptions.UnreachableTargetException;
 import com.xm.model.Node;
 import com.xm.model.data.Data;
 import com.xm.utils.PathTraverser;
+import com.xm.utils.visitors.DataVisitor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayDeque;
@@ -29,6 +30,8 @@ import static com.xm.utils.Settings.MAX_ALLOWED_MOVES;
 @RequiredArgsConstructor
 public class Graph<T extends Data<T>> {
 
+    private final DataVisitor dataVisitor;
+
     public Deque<Node<T>> breadthFirstSearch(Node<T> start, Node<T> target) {
         Deque<Node<T>> deque = new ArrayDeque<>();
         Map<Node<T>, Node<T>> visited = new HashMap<>();
@@ -50,7 +53,7 @@ public class Graph<T extends Data<T>> {
                 return PathTraverser.traversePath(start, target, visited);
             }
 
-            for (Data<T> adj : current.getData().getAdjacent()) {
+            for (Data<T> adj : current.getData().accept(dataVisitor)) {
                 Node<T> nodeFromData = Node.<T>builder()
                         .data(adj)
                         .previous(current)

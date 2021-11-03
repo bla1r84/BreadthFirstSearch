@@ -6,6 +6,8 @@ import com.xm.model.data.Knight;
 import com.xm.services.Graph;
 import com.xm.utils.CoordinatesPathLogger;
 import com.xm.utils.Settings;
+import com.xm.utils.visitors.DataEdgesVisitor;
+import com.xm.utils.visitors.DataVisitor;
 import lombok.extern.slf4j.Slf4j;
 
 import static com.xm.model.data.Knight.createPieceFromCoordinates;
@@ -24,7 +26,9 @@ public class Main {
                 Settings.TARGET.x,
                 Settings.TARGET.y)));
 
-        Graph<Knight> knightGraph = new Graph<>();
+        DataVisitor dataVisitor = new DataEdgesVisitor();
+
+        Graph<Knight> knightGraph = new Graph<>(dataVisitor);
 
         CoordinatesPathLogger.logPath(knightGraph.breadthFirstSearch(knightStart, knightTarget));
         long end = System.currentTimeMillis();
