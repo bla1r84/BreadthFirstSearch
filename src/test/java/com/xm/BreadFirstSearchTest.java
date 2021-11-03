@@ -38,6 +38,8 @@ class BreadFirstSearchTest {
 
         log.info("Path: {}", deque.stream()
                 .map(Node::getData)
+                .map(data -> ((MyInteger) data))
+                .map(MyInteger::getInteger)
                 .map(String::valueOf)
                 .collect(joining(" -> ")));
 
