@@ -18,7 +18,7 @@ public class MyInteger implements Data<MyInteger> {
 
     @Override
     public Set<MyInteger> accept(DataVisitor dv) {
-        return dv.visitMyInteger(this);
+        return dv.visit(this);
     }
 
 }

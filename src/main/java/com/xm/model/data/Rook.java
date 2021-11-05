@@ -17,7 +17,7 @@ public class Rook extends Piece<Rook> {
 
     @Override
     public Set<Rook> accept(DataVisitor dv) {
-        return dv.visitRook(this);
+        return dv.visit(this);
     }
 
 }

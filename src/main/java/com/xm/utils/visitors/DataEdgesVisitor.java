@@ -12,17 +12,17 @@ import java.util.Set;
 public class DataEdgesVisitor implements DataVisitor {
 
     @Override
-    public Set<Knight> visitKnight(Knight k) {
+    public Set<Knight> visit(Knight k) {
         return KnightVisitor.visit(k);
     }
 
     @Override
-    public Set<Rook> visitRook(Rook r) {
+    public Set<Rook> visit(Rook r) {
         return RookVisitor.visit(r);
     }
 
     @Override
-    public Set<MyInteger> visitMyInteger(MyInteger mi) {
+    public Set<MyInteger> visit(MyInteger mi) {
         return MyIntegerVisitor.visit(mi);
     }
 

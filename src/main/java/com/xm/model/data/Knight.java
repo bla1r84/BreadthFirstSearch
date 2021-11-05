@@ -17,7 +17,7 @@ public class Knight extends Piece<Knight> {
 
     @Override
     public Set<Knight> accept(DataVisitor dv) {
-        return dv.visitKnight(this);
+        return dv.visit(this);
     }
 
 }

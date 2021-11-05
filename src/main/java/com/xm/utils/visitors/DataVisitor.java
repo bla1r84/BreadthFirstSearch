@@ -8,10 +8,10 @@ import java.util.Set;
 
 public interface DataVisitor {
 
-    Set<Knight> visitKnight(Knight k);
+    Set<Knight> visit(Knight k);
 
-    Set<Rook> visitRook(Rook r);
+    Set<Rook> visit(Rook r);
 
-    Set<MyInteger> visitMyInteger(MyInteger mi);
+    Set<MyInteger> visit(MyInteger mi);
 
 }
