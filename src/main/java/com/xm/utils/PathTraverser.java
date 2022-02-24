@@ -24,7 +24,7 @@ public class PathTraverser {
      * @param <T>     the type of Data the Nodes contain
      * @return the path from start to finish as a Deque
      */
-    public static <T extends Data> Deque<Node<T>> traversePath(
+    public static <T extends Data<T>> Deque<Node<T>> traversePath(
             Node<T> start,
             Node<T> target,
             Map<Node<T>, Node<T>> visited) {

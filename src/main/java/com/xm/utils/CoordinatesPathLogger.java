@@ -1,6 +1,7 @@
 package com.xm.utils;
 
 import com.xm.model.Node;
+import com.xm.model.data.Data;
 import com.xm.model.data.Piece;
 import com.xm.utils.mapper.NumberToLetterMapper;
 import lombok.AccessLevel;
@@ -20,22 +21,22 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CoordinatesPathLogger {
 
-    public static <T extends Piece> void logPath(Deque<Node<T>> path) {
+    public static <T extends Piece<T>> void logPath(Deque<Node<T>> path) {
         log.info("Minimum jumps required: {}", path.size() - 1);
         log.info("Shortest path: {}", generatePathString(path));
     }
 
-    private static <T extends Piece> String generatePathString(Deque<Node<T>> path) {
+    private static <T extends Piece<T>> String generatePathString(Deque<Node<T>> path) {
         Map<Integer, String> numberToLetterMap = NumberToLetterMapper.getNumberToLetterMap();
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        Deque<T> dataPath = getDataPathFromNodePath(path);
+        Deque<Data<T>> dataPath = getDataPathFromNodePath(path);
 
-        Iterator<T> iterator = dataPath.iterator();
+        Iterator<Data<T>> iterator = dataPath.iterator();
 
         while (iterator.hasNext()) {
-            T piece = iterator.next();
+            Piece<T> piece = (Piece<T>) iterator.next();
             stringBuilder.append("(");
 
             stringBuilder.append(numberToLetterMap.getOrDefault(
@@ -53,7 +54,7 @@ public class CoordinatesPathLogger {
         return stringBuilder.toString();
     }
 
-    private static <T extends Piece> Deque<T> getDataPathFromNodePath(Deque<Node<T>> path) {
+    private static <T extends Data<T>> Deque<Data<T>> getDataPathFromNodePath(Deque<Node<T>> path) {
         return path.stream()
                 .map(Node::getData)
                 .collect(Collectors.toCollection(ArrayDeque::new));

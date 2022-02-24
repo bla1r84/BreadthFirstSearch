@@ -13,7 +13,7 @@ import lombok.*;
  * <p>
  * <b>depth</b> is the number of steps we had to make in order to reach this Node
  *
- * @param <T> the type of Data the Nodes of the Graph contain
+ * @param <T> the type of Data the Nodes of the Graph will contain
  */
 @RequiredArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -22,10 +22,10 @@ import lombok.*;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @Builder
-public class Node<T extends Data> {
+public class Node<T extends Data<T>> {
 
     @EqualsAndHashCode.Include
-    private final T data;
+    private final Data<T> data;
 
     @ToString.Exclude
     private Node<T> previous;

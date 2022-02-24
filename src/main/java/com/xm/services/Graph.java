@@ -1,6 +1,5 @@
 package com.xm.services;
 
-import com.xm.adjacentgetter.AdjacentNodesFinder;
 import com.xm.exceptions.ExceededMaxMovesException;
 import com.xm.exceptions.UnreachableTargetException;
 import com.xm.model.Node;
@@ -28,9 +27,7 @@ import static com.xm.utils.Settings.MAX_ALLOWED_MOVES;
  * @param <T> the type of Data the Nodes of the Graph contain
  */
 @RequiredArgsConstructor
-public class Graph<T extends Data> {
-
-    private final AdjacentNodesFinder<T> adjacentNodesFinder;
+public class Graph<T extends Data<T>> {
 
     public Deque<Node<T>> breadthFirstSearch(Node<T> start, Node<T> target) {
         Deque<Node<T>> deque = new ArrayDeque<>();
@@ -38,7 +35,7 @@ public class Graph<T extends Data> {
 
         start.setDepth(0);
         visited.put(start, start);
-        deque.add(start);
+        deque.offer(start);
 
         while (!deque.isEmpty()) {
             Node<T> current = deque.poll();
@@ -53,13 +50,19 @@ public class Graph<T extends Data> {
                 return PathTraverser.traversePath(start, target, visited);
             }
 
-            for (Node<T> n : adjacentNodesFinder.getAdjacent(current)) {
-                deque.add(visited.computeIfAbsent(n, node -> Node.<T>builder()
-                        .data(node.getData())
+            for (Data<T> adj : current.getData().getAdjacent()) {
+                Node<T> nodeFromData = Node.<T>builder()
+                        .data(adj)
                         .previous(current)
                         .depth(current.getDepth() + 1)
-                        .build()));
+                        .build();
+
+                visited.computeIfAbsent(nodeFromData, node -> {
+                    deque.offer(node);
+                    return node;
+                });
             }
+
         }
 
         throw new UnreachableTargetException("End position is unreachable!");

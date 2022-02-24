@@ -1,18 +1,17 @@
 package com.xm.model.data;
 
 import com.xm.model.Coordinates;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 @Getter
 @EqualsAndHashCode
 @ToString
-public class Piece implements Data {
+public abstract class Piece<T> implements Data<T> {
 
-    private final Coordinates coordinates;
-
-    public static Piece createPieceFromCoordinates(Coordinates coordinates) {
-        return new Piece(coordinates);
-    }
+    protected final Coordinates coordinates;
 
 }
